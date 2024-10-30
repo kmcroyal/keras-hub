@@ -190,7 +190,7 @@ def convert_checkpoints(
         keras_hub_model = keras_hub.models.GemmaCausalLM.from_preset(preset)
     else:
         hf_id, keras_preset = SIZE_MAP[
-            f"v{gemma_version.lower()}_{size.lower()}"
+            f"v{gemma_version}_{size.lower()}"
         ]
         print(f"\n-> Loading Keras weights from file `{weights_file}`...")
         keras_hub_model = keras_hub.models.GemmaCausalLM.from_preset(
