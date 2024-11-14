@@ -319,7 +319,7 @@ def convert_checkpoints(
     # Tokenizer
 
     if not vocab_path:
-        tokenizer_preset = preset or SIZE_MAP f"v{str(gemma_version).lower()}_{str(size).lower()}"
+        tokenizer_preset = preset or SIZE_MAP[f"v{str(gemma_version).lower()}_{str(size).lower()}"]
 
         print(
             "\n-> Loading KerasHub Gemma tokenizer with "
