@@ -161,10 +161,10 @@ flags.DEFINE_string(
     "float32",
     "Set the precision of the converted checkpoint. Must be a valid PyTorch dtype.",
 )
-flags.DEFINE_string(
+flags.DEFINE_integer(
     "gemma_version",
     None,
-    "String denoting the Gemma version (e.g. 1, 2).",
+    "Integer denoting the Gemma version (e.g. 1, 2).",
 )
 
 
@@ -320,7 +320,7 @@ def convert_checkpoints(
 
     if not vocab_path:
         tokenizer_preset = preset or SIZE_MAP f"v{str(gemma_version).lower()}_{str(size).lower()}"
-”
+
         print(
             "\n-> Loading KerasHub Gemma tokenizer with "
             f"preset `{tokenizer_preset}`..."
