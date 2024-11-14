@@ -161,10 +161,10 @@ flags.DEFINE_string(
     "float32",
     "Set the precision of the converted checkpoint. Must be a valid PyTorch dtype.",
 )
-flags.DEFINE_integer(
+flags.DEFINE_string(
     "gemma_version",
     None,
-    "Integer denoting the Gemma version (e.g. 1, 2).",
+    "String denoting the Gemma version (e.g. 1, 2).",
 )
 
 
