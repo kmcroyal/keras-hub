@@ -190,7 +190,7 @@ def convert_checkpoints(
         keras_hub_model = keras_hub.models.GemmaCausalLM.from_preset(preset)
     else:
         hf_id, keras_preset = SIZE_MAP[
-            f"v{gemma_version}_{size.lower()}"
+            f"v{str(gemma_version).lower()}_{str(size).lower()}"
         ]
         print(f"\n-> Loading Keras weights from file `{weights_file}`...")
         keras_hub_model = keras_hub.models.GemmaCausalLM.from_preset(
@@ -199,7 +199,8 @@ def convert_checkpoints(
         keras_hub_model.load_weights(weights_file)
 
     print(f"\n-> Loading HuggingFace Gemma `{size.upper()}` model...")
-    config = CONFIG_MAPPING[f"v{gemma_version}_{size.lower()}"]
+    config = CONFIG_MAPPING[f"v{str(gemma_version).lower()}_{str(size).lower()}"
+]
     if isinstance(config, transformers.GemmaConfig):
         hf_model = transformers.GemmaForCausalLM(config)
     elif isinstance(config, transformers.Gemma2Config):
@@ -320,7 +321,8 @@ def convert_checkpoints(
     # Tokenizer
 
     if not vocab_path:
-        tokenizer_preset = preset or SIZE_MAP f”v{gemma_version}_{size.lower()}”
+        tokenizer_preset = preset or SIZE_MAP f"v{str(gemma_version).lower()}_{str(size).lower()}"
+”
         print(
             "\n-> Loading KerasHub Gemma tokenizer with "
             f"preset `{tokenizer_preset}`..."
