@@ -184,18 +184,16 @@ def convert_checkpoints(
     output_dir: str,
     vocab_path: Optional[str] = None,
 ):
+    gemma_version = str(gemma_version)  # Ensure gemma_version is a string
+    
     if preset is not None:
         hf_id = PRESET_MAP[preset]
         print(f"\n-> Loading KerasHub Gemma model with preset `{preset}`...")
         keras_hub_model = keras_hub.models.GemmaCausalLM.from_preset(preset)
     else:
-        hf_id, keras_preset = SIZE_MAP[
-            f"v{str(gemma_version).lower()}_{str(size).lower()}"
-        ]
+        hf_id, keras_preset = SIZE_MAP[f"v{gemma_version.lower()}_{str(size).lower()}"]
         print(f"\n-> Loading Keras weights from file `{weights_file}`...")
-        keras_hub_model = keras_hub.models.GemmaCausalLM.from_preset(
-            keras_preset
-        )
+        keras_hub_model = keras_hub.models.GemmaCausalLM.from_preset(keras_preset)
         keras_hub_model.load_weights(weights_file)
 
     print(f"\n-> Loading HuggingFace Gemma `{size.upper()}` model...")
