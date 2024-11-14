@@ -179,7 +179,7 @@ def _set_default_tensor_type(dtype: torch.dtype):
 def convert_checkpoints(
     preset: str,
     weights_file: str,
-    gemma_version: int,
+    gemma_version: str,
     size: str,
     output_dir: str,
     vocab_path: Optional[str] = None,
