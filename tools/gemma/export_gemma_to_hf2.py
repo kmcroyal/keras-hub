@@ -179,12 +179,11 @@ def _set_default_tensor_type(dtype: torch.dtype):
 def convert_checkpoints(
     preset: str,
     weights_file: str,
-    gemma_version: str,
+    gemma_version: int,
     size: str,
     output_dir: str,
     vocab_path: Optional[str] = None,
 ):
-    gemma_version = str(gemma_version)  # Ensure gemma_version is a string
     
     if preset is not None:
         hf_id = PRESET_MAP[preset]
@@ -192,7 +191,7 @@ def convert_checkpoints(
         keras_hub_model = keras_hub.models.GemmaCausalLM.from_preset(preset)
     else:
         hf_id, keras_preset = SIZE_MAP[f"v{str(gemma_version).lower()}_{str(size).lower()}"]
-        print(f"\n-> Loading Keras weights from file `{weights_file}`...")
+        print(f"\n-> Loading Keras weights from file `{weights_file}`{SIZE_MAP[f"v{str(gemma_version).lower()}_{str(size).lower()}"]}")
         keras_hub_model = keras_hub.models.GemmaCausalLM.from_preset(keras_preset)
         keras_hub_model.load_weights(weights_file)
 
